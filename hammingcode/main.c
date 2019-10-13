@@ -28,8 +28,8 @@ int main() {
         main(); // restart the program
     }
     
-    int inputDataStream[inputLength-1];
-    int dataStreamContainingError[inputLength-1];
+    int inputDataStream[inputLength];
+    int dataStreamContainingError[inputLength];
     
     // Gets input of data stream without error
     printf("Please input the data stream without error, from the MSB to the LSB\n");
@@ -43,7 +43,7 @@ int main() {
             printf("The data bit entered can only be 0 or 1.\n");
             i++; // do not decrement counter
         } else {
-            inputDataStream[i-1] = tempDataBit;
+            inputDataStream[i] = tempDataBit;
         }
     }
     
