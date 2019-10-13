@@ -33,7 +33,7 @@ int main() {
     
     // Gets input of data stream without error
     printf("Please input the data stream without error, from the MSB to the LSB\n");
-    for (int i=(inputLength-1); i>=0; i--) {
+    for (int i=inputLength; i>0; i--) {
         int tempDataBit = 0;
         printf("Please enter data bit D%d: ", i);
         scanf("%d", &tempDataBit);
@@ -43,33 +43,33 @@ int main() {
             printf("The data bit entered can only be 0 or 1.\n");
             i++; // do not decrement counter
         } else {
-            inputDataStream[i] = tempDataBit;
+            inputDataStream[i-1] = tempDataBit;
         }
     }
     
-    // Gets input of zero-based index of data bit containing error
-    printf("Please input the data bit in which contains the error: ");
+    // Gets input of bit position containing error
+    printf("Please input the bit position containing the error: ");
     scanf("%d", &inputDataBitContainingError);
     
     // check if user entered a number which is out of range for the datastream
-    while (isInRange(inputDataBitContainingError, 0, (int)sizeof(inputDataStream)) == FALSE) {
+    while (isInRange(inputDataBitContainingError, 1, inputLength) == FALSE) {
         printf("The index entered is out of range. Please try again: ");
         scanf("%d", &inputDataBitContainingError);
-        if (isInRange(inputDataBitContainingError, 0, (int)sizeof(inputDataStream)) == TRUE) {
+        if (isInRange(inputDataBitContainingError, 1, inputLength) == TRUE) {
             break; // exit the loop once user enters an index within the range
         }
     }
     
     // Displays data stream without error
     printf("The data stream without error is: ");
-    for (int i=(inputLength-1); i>=0; i--) {
+    for (int i=inputLength; i>0; i--) {
         printf("%d", inputDataStream[i]);
     }
     printf("\n");
     
     // Displays data stream with 1-bit error
     printf("The data stream with 1-bit error is: ");
-    for (int i=(inputLength-1); i>=0; i--) {
+    for (int i=inputLength; i>0; i--) {
         if (i == inputDataBitContainingError) {
             dataStreamContainingError[i] = invertBit(inputDataStream[i]);
         } else {
