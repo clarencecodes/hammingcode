@@ -30,8 +30,8 @@ int main() {
     int inputDataStream[inputLength-1];
     
     // Gets input of data stream without error
-    printf("Please input the data stream without error, bit by bit\n");
-    for (int i=0; i<=(inputLength-1); i++) {
+    printf("Please input the data stream without error, from the MSB to the LSB\n");
+    for (int i=(inputLength-1); i>=0; i--) {
         int tempDataBit = 0;
         printf("Please enter data bit D%d: ", i);
         scanf("%d", &tempDataBit);
@@ -39,14 +39,14 @@ int main() {
         // check if databit entered is 0 or 1
         if (tempDataBit != 0 && tempDataBit != 1) {
             printf("The data bit entered can only be 0 or 1.\n");
-            i--; // do not increment counter
+            i++; // do not decrement counter
         } else {
             inputDataStream[i] = tempDataBit;
         }
     }
     
     // Gets input of zero-based index of data bit containing error
-    printf("Please input the zero-based index of the data bit containing the error: ");
+    printf("Please input the data bit in which contains the error: ");
     scanf("%d", &inputIndexOfDataBitContainingError);
     
     // check if user entered a number which is out of range for the datastream
@@ -61,7 +61,7 @@ int main() {
     // Displays data stream without error
     // TODO: remove this once done with assignment
     printf("Your data stream without error is: ");
-    for (int i=0; i<=(inputLength-1); i++) {
+    for (int i=(inputLength-1); i>=0; i--) {
         printf("%d", inputDataStream[i]);
     }
     
