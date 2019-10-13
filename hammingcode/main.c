@@ -12,6 +12,7 @@
 #define FALSE 0
 
 int isInRange(int number, int start, int end);
+int invertBit(int binaryNumber);
 
 int main() {
     int inputLength = 0;
@@ -28,6 +29,7 @@ int main() {
     }
     
     int inputDataStream[inputLength-1];
+    int dataStreamContainingError[inputLength-1];
     
     // Gets input of data stream without error
     printf("Please input the data stream without error, from the MSB to the LSB\n");
@@ -59,13 +61,22 @@ int main() {
     }
     
     // Displays data stream without error
-    // TODO: remove this once done with assignment
-    printf("Your data stream without error is: ");
+    printf("The data stream without error is: ");
     for (int i=(inputLength-1); i>=0; i--) {
         printf("%d", inputDataStream[i]);
     }
+    printf("\n");
     
-    // TODO: display the data bit with 1-bit error
+    // Displays data stream with 1-bit error
+    printf("The data stream with 1-bit error is: ");
+    for (int i=(inputLength-1); i>=0; i--) {
+        if (i == inputIndexOfDataBitContainingError) {
+            dataStreamContainingError[i] = invertBit(inputDataStream[i]);
+        } else {
+            dataStreamContainingError[i] = inputDataStream[i];
+        }
+        printf("%d", dataStreamContainingError[i]);
+    }
     
     // TODO: display check bits of the correct data stream, in the format of C16 C8 C4 C2 C1 C0.
     
@@ -83,5 +94,13 @@ int isInRange(number, start, end) {
         return FALSE; // false, number is not in range
     }
     return TRUE; // true, number is in range
+}
+
+int invertBit(int binaryNumber) {
+    if (binaryNumber == 0) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
