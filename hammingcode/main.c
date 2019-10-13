@@ -8,6 +8,9 @@
 
 #include <stdio.h>
 
+#define TRUE 1
+#define FALSE 0
+
 int isInRange(int number, int start, int end);
 
 int main() {
@@ -47,10 +50,10 @@ int main() {
     scanf("%d", &inputIndexOfDataBitContainingError);
     
     // check if user entered a number which is out of range for the datastream
-    while (isInRange(inputIndexOfDataBitContainingError, 0, (int)sizeof(inputDataStream)) == 0) {
+    while (isInRange(inputIndexOfDataBitContainingError, 0, (int)sizeof(inputDataStream)) == FALSE) {
         printf("The index entered is out of range. Please try again: ");
         scanf("%d", &inputIndexOfDataBitContainingError);
-        if (isInRange(inputIndexOfDataBitContainingError, 0, (int)sizeof(inputDataStream)) == 1) {
+        if (isInRange(inputIndexOfDataBitContainingError, 0, (int)sizeof(inputDataStream)) == TRUE) {
             break; // exit the loop once user enters an index within the range
         }
     }
@@ -77,8 +80,8 @@ int main() {
 
 int isInRange(number, start, end) {
     if (number < start || number > end) {
-        return 0; // false, number is not in range
+        return FALSE; // false, number is not in range
     }
-    return 1; // true, number is in range
+    return TRUE; // true, number is in range
 }
 
