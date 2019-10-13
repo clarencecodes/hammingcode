@@ -16,7 +16,7 @@ int invertBit(int binaryNumber);
 
 int main() {
     int inputLength = 0;
-    int inputIndexOfDataBitContainingError = 0;
+    int inputDataBitContainingError = 0;
     
     // Gets input of length of data bits
     printf("Please input the length of data bits (8 or 16): ");
@@ -49,13 +49,13 @@ int main() {
     
     // Gets input of zero-based index of data bit containing error
     printf("Please input the data bit in which contains the error: ");
-    scanf("%d", &inputIndexOfDataBitContainingError);
+    scanf("%d", &inputDataBitContainingError);
     
     // check if user entered a number which is out of range for the datastream
-    while (isInRange(inputIndexOfDataBitContainingError, 0, (int)sizeof(inputDataStream)) == FALSE) {
+    while (isInRange(inputDataBitContainingError, 0, (int)sizeof(inputDataStream)) == FALSE) {
         printf("The index entered is out of range. Please try again: ");
-        scanf("%d", &inputIndexOfDataBitContainingError);
-        if (isInRange(inputIndexOfDataBitContainingError, 0, (int)sizeof(inputDataStream)) == TRUE) {
+        scanf("%d", &inputDataBitContainingError);
+        if (isInRange(inputDataBitContainingError, 0, (int)sizeof(inputDataStream)) == TRUE) {
             break; // exit the loop once user enters an index within the range
         }
     }
@@ -70,7 +70,7 @@ int main() {
     // Displays data stream with 1-bit error
     printf("The data stream with 1-bit error is: ");
     for (int i=(inputLength-1); i>=0; i--) {
-        if (i == inputIndexOfDataBitContainingError) {
+        if (i == inputDataBitContainingError) {
             dataStreamContainingError[i] = invertBit(inputDataStream[i]);
         } else {
             dataStreamContainingError[i] = inputDataStream[i];
