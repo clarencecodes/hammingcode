@@ -7,12 +7,14 @@
 //
 
 #include <stdio.h>
+#include <math.h>
 
 #define TRUE 1
 #define FALSE 0
 
 int isInRange(int number, int start, int end);
 int invertBit(int binaryNumber);
+int convertBinaryToDecimal(int binaryNumber[], int numberOfBits);
 
 int main() {
     int inputLength = 0;
@@ -47,8 +49,8 @@ int main() {
         }
     }
     
-    // Gets input of bit position containing error
-    printf("Please input the bit position containing the error: ");
+    // Get input of data bit containing error
+    printf("Please input the data bit containing the error: ");
     scanf("%d", &inputDataBitContainingError);
     
     // check if user entered a number which is out of range for the datastream
@@ -98,7 +100,7 @@ int main() {
     }
     printf("\n");
     
-    // TODO: display check bits of the data stream with 1-bit error, in the format of C’16 C’8 C’4 C’2 C’1 C’0.
+    // Display check bits of the data stream with 1-bit error
     printf("The check bits of the data stream with 1-bit error: ");
     int c16Error, c8Error, c4Error, c2Error, c1Error;
     if (inputLength == 8) {
@@ -117,22 +119,36 @@ int main() {
     }
     printf("\n");
     
-    // TODO: display syndrome word, in the format of C’’16 C’’8 C’’4 C’’2 C’’1 C’’0.
+    // Display syndrome word
     printf("The syndrome word is: ");
-    int c16Syndrome, c8Syndrome, c4Syndrome, c2Syndrome, c1Syndrome;
+    int c16Syndrome, c8Syndrome, c4Syndrome, c2Syndrome, c1Syndrome, bitPositionWithError;
     c8Syndrome = c8^c8Error;
     c4Syndrome = c4^c4Error;
     c2Syndrome = c2^c2Error;
     c1Syndrome = c1^c1Error;
     if (inputLength == 8) {
-        printf("%d%d%d%d", c8Syndrome, c4Syndrome, c2Syndrome, c1Syndrome);
+        printf("%d%d%d%d\n", c8Syndrome, c4Syndrome, c2Syndrome, c1Syndrome);
+        
+        int syndromeWord[4];
+        syndromeWord[3] = c8Syndrome;
+        syndromeWord[2] = c4Syndrome;
+        syndromeWord[1] = c2Syndrome;
+        syndromeWord[0] = c1Syndrome;
+        bitPositionWithError = convertBinaryToDecimal(syndromeWord, 3);
     } else {
         c16Syndrome = c16^c16Error;
-        printf("%d%d%d%d%d", c16Syndrome, c8Syndrome, c4Syndrome, c2Syndrome, c1Syndrome);
+        printf("%d%d%d%d%d\n", c16Syndrome, c8Syndrome, c4Syndrome, c2Syndrome, c1Syndrome);
+        
+        int syndromeWord[5];
+        syndromeWord[4] = c16Syndrome;
+        syndromeWord[3] = c8Syndrome;
+        syndromeWord[2] = c4Syndrome;
+        syndromeWord[1] = c2Syndrome;
+        syndromeWord[0] = c1Syndrome;
+        bitPositionWithError = convertBinaryToDecimal(syndromeWord, 4);
     }
-    printf("\n");
-    
-    // TODO: display which position in the table including data bits and check bits gets error
+    // Display the position number
+    printf("The error occurs in position %d of the table\n", bitPositionWithError);
     
     printf("\nEND OF PROGRAM.\n");
 }
@@ -152,3 +168,12 @@ int invertBit(int binaryNumber) {
     }
 }
 
+int convertBinaryToDecimal(int binaryNumber[], int numberOfIndexesInArray) {
+    int decimal = 0;
+    for (int i=numberOfIndexesInArray; i>=0; i--) {
+        if (binaryNumber[i] == 1) {
+            decimal += pow((double)2, (double)i);
+        }
+    }
+    return decimal;
+}
