@@ -82,14 +82,18 @@ int main() {
     // Display check bits of the correct data stream
     printf("The check bits of the correct data stream: ");
     int c16, c8, c4, c2, c1;
-    c8 = inputDataStream[5]^inputDataStream[6]^inputDataStream[7]^inputDataStream[8];
-    c4 = inputDataStream[2]^inputDataStream[3]^inputDataStream[4]^inputDataStream[8];
-    c2 = inputDataStream[1]^inputDataStream[3]^inputDataStream[4]^inputDataStream[6]^inputDataStream[7];
-    c1 = inputDataStream[1]^inputDataStream[2]^inputDataStream[4]^inputDataStream[5]^inputDataStream[7];
     if (inputLength == 8) {
+        c8 = inputDataStream[5]^inputDataStream[6]^inputDataStream[7]^inputDataStream[8];
+        c4 = inputDataStream[2]^inputDataStream[3]^inputDataStream[4]^inputDataStream[8];
+        c2 = inputDataStream[1]^inputDataStream[3]^inputDataStream[4]^inputDataStream[6]^inputDataStream[7];
+        c1 = inputDataStream[1]^inputDataStream[2]^inputDataStream[4]^inputDataStream[5]^inputDataStream[7];
         printf("%d%d%d%d", c8, c4, c2, c1);
-    } else if (inputLength == 16) {
+    } else {
         c16 = inputDataStream[12]^inputDataStream[13]^inputDataStream[14]^inputDataStream[15]^inputDataStream[16];
+        c8 = inputDataStream[5]^inputDataStream[6]^inputDataStream[7]^inputDataStream[8]^inputDataStream[9]^inputDataStream[10]^inputDataStream[11];
+        c4 = inputDataStream[2]^inputDataStream[3]^inputDataStream[4]^inputDataStream[8]^inputDataStream[9]^inputDataStream[10]^inputDataStream[11]^inputDataStream[15]^inputDataStream[16];
+        c2 = inputDataStream[1]^inputDataStream[3]^inputDataStream[4]^inputDataStream[6]^inputDataStream[7]^inputDataStream[10]^inputDataStream[11]^inputDataStream[13]^inputDataStream[14];
+        c1 = inputDataStream[1]^inputDataStream[2]^inputDataStream[4]^inputDataStream[5]^inputDataStream[7]^inputDataStream[9]^inputDataStream[11]^inputDataStream[12]^inputDataStream[14]^inputDataStream[16];
         printf("%d%d%d%d%d", c16, c8, c4, c2, c1);
     }
     printf("\n");
@@ -97,14 +101,18 @@ int main() {
     // TODO: display check bits of the data stream with 1-bit error, in the format of C’16 C’8 C’4 C’2 C’1 C’0.
     printf("The check bits of the data stream with 1-bit error: ");
     int c16Error, c8Error, c4Error, c2Error, c1Error;
-    c8Error = dataStreamContainingError[5]^dataStreamContainingError[6]^dataStreamContainingError[7]^dataStreamContainingError[8];
-    c4Error = dataStreamContainingError[2]^dataStreamContainingError[3]^dataStreamContainingError[4]^dataStreamContainingError[8];
-    c2Error = dataStreamContainingError[1]^dataStreamContainingError[3]^dataStreamContainingError[4]^dataStreamContainingError[6]^dataStreamContainingError[7];
-    c1Error = dataStreamContainingError[1]^dataStreamContainingError[2]^dataStreamContainingError[4]^dataStreamContainingError[5]^dataStreamContainingError[7];
     if (inputLength == 8) {
+        c8Error = dataStreamContainingError[5]^dataStreamContainingError[6]^dataStreamContainingError[7]^dataStreamContainingError[8];
+        c4Error = dataStreamContainingError[2]^dataStreamContainingError[3]^dataStreamContainingError[4]^dataStreamContainingError[8];
+        c2Error = dataStreamContainingError[1]^dataStreamContainingError[3]^dataStreamContainingError[4]^dataStreamContainingError[6]^dataStreamContainingError[7];
+        c1Error = dataStreamContainingError[1]^dataStreamContainingError[2]^dataStreamContainingError[4]^dataStreamContainingError[5]^dataStreamContainingError[7];
         printf("%d%d%d%d", c8Error, c4Error, c2Error, c1Error);
-    } else if (inputLength == 16) {
+    } else {
         c16Error = dataStreamContainingError[12]^dataStreamContainingError[13]^dataStreamContainingError[14]^dataStreamContainingError[15]^dataStreamContainingError[16];
+        c8Error = dataStreamContainingError[5]^dataStreamContainingError[6]^dataStreamContainingError[7]^dataStreamContainingError[8]^dataStreamContainingError[9]^dataStreamContainingError[10]^dataStreamContainingError[11];
+        c4Error = dataStreamContainingError[2]^dataStreamContainingError[3]^dataStreamContainingError[4]^dataStreamContainingError[8]^dataStreamContainingError[9]^dataStreamContainingError[10]^dataStreamContainingError[11]^dataStreamContainingError[15]^dataStreamContainingError[16];
+        c2Error = dataStreamContainingError[1]^dataStreamContainingError[3]^dataStreamContainingError[4]^dataStreamContainingError[6]^dataStreamContainingError[7]^dataStreamContainingError[10]^dataStreamContainingError[11]^dataStreamContainingError[13]^dataStreamContainingError[14];
+        c1Error = dataStreamContainingError[1]^dataStreamContainingError[2]^dataStreamContainingError[4]^dataStreamContainingError[5]^dataStreamContainingError[7]^dataStreamContainingError[9]^dataStreamContainingError[11]^dataStreamContainingError[12]^dataStreamContainingError[14]^dataStreamContainingError[16];
         printf("%d%d%d%d%d", c16Error, c8Error, c4Error, c2Error, c1Error);
     }
     printf("\n");
@@ -118,7 +126,7 @@ int main() {
     c1Syndrome = c1^c1Error;
     if (inputLength == 8) {
         printf("%d%d%d%d", c8Syndrome, c4Syndrome, c2Syndrome, c1Syndrome);
-    } else if (inputLength == 16) {
+    } else {
         c16Syndrome = c16^c16Error;
         printf("%d%d%d%d%d", c16Syndrome, c8Syndrome, c4Syndrome, c2Syndrome, c1Syndrome);
     }
