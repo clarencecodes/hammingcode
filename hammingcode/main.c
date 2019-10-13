@@ -77,8 +77,21 @@ int main() {
         }
         printf("%d", dataStreamContainingError[i]);
     }
+    printf("\n");
     
-    // TODO: display check bits of the correct data stream, in the format of C16 C8 C4 C2 C1 C0.
+    // Display check bits of the correct data stream
+    printf("The check bits of the correct data stream: ");
+    int c16, c8, c4, c2, c1;
+    c8 = inputDataStream[5]^inputDataStream[6]^inputDataStream[7]^inputDataStream[8];
+    c4 = inputDataStream[2]^inputDataStream[3]^inputDataStream[4]^inputDataStream[8];
+    c2 = inputDataStream[1]^inputDataStream[3]^inputDataStream[4]^inputDataStream[6]^inputDataStream[7];
+    c1 = inputDataStream[1]^inputDataStream[2]^inputDataStream[4]^inputDataStream[5]^inputDataStream[7];
+    if (inputLength == 8) {
+        printf("%d%d%d%d", c8, c4, c2, c1);
+    } else if (inputLength == 16) {
+        c16 = inputDataStream[12]^inputDataStream[13]^inputDataStream[14]^inputDataStream[15]^inputDataStream[16];
+        printf("%d%d%d%d%d", c16, c8, c4, c2, c1);
+    }
     
     // TODO: display check bits of the data stream with 1-bit error, in the format of C’16 C’8 C’4 C’2 C’1 C’0.
     
