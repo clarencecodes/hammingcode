@@ -110,6 +110,19 @@ int main() {
     printf("\n");
     
     // TODO: display syndrome word, in the format of C’’16 C’’8 C’’4 C’’2 C’’1 C’’0.
+    printf("The syndrome word is: ");
+    int c16Syndrome, c8Syndrome, c4Syndrome, c2Syndrome, c1Syndrome;
+    c8Syndrome = c8^c8Error;
+    c4Syndrome = c4^c4Error;
+    c2Syndrome = c2^c2Error;
+    c1Syndrome = c1^c1Error;
+    if (inputLength == 8) {
+        printf("%d%d%d%d", c8Syndrome, c4Syndrome, c2Syndrome, c1Syndrome);
+    } else if (inputLength == 16) {
+        c16Syndrome = c16^c16Error;
+        printf("%d%d%d%d%d", c16Syndrome, c8Syndrome, c4Syndrome, c2Syndrome, c1Syndrome);
+    }
+    printf("\n");
     
     // TODO: display which position in the table including data bits and check bits gets error
     
