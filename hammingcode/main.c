@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 #define TRUE 1
 #define FALSE 0
@@ -52,6 +53,7 @@ int main() {
     // Get input of data bit containing error
     printf("Please input the data bit containing the error: ");
     scanf("%d", &inputDataBitContainingError);
+    printf("\n");
     
     // check if user entered a number which is out of range for the datastream
     while (isInRange(inputDataBitContainingError, 1, inputLength) == FALSE) {
@@ -151,6 +153,7 @@ int main() {
     printf("The error occurs in position %d of the table\n", bitPositionWithError);
     
     printf("\nEND OF PROGRAM.\n");
+    exit(0);
 }
 
 int isInRange(number, start, end) {
