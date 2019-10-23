@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define TRUE 1
 #define FALSE 0
@@ -35,19 +36,11 @@ int main() {
     int dataStreamContainingError[inputLength];
     
     // Gets input of data stream without error
-    printf("Please input the data stream without error, from the MSB to the LSB\n");
+    printf("Please input the data stream without error, from the MSB to the LSB: ");
     for (int i=inputLength; i>0; i--) {
-        int tempDataBit = 0;
-        printf("Please enter data bit D%d: ", i);
-        scanf("%d", &tempDataBit);
+        scanf("%1d", &inputDataStream[i]);
         
-        // check if databit entered is 0 or 1
-        if (tempDataBit != 0 && tempDataBit != 1) {
-            printf("The data bit entered can only be 0 or 1.\n");
-            i++; // do not decrement counter
-        } else {
-            inputDataStream[i] = tempDataBit;
-        }
+        // TODO: check if databit entered is 0 or 1
     }
     
     // Get input of data bit containing error
