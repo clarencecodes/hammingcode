@@ -40,7 +40,10 @@ int main() {
     for (int i=inputLength; i>0; i--) {
         scanf("%1d", &inputDataStream[i]);
         
-        // TODO: check if databit entered is 0 or 1
+        if (inputDataStream[i] != 0 && inputDataStream[i] != 1) {
+            printf("Error. The data stream contains a data bit which is not a 1 or 0. Exiting the program...\n");
+            exit(1);
+        }
     }
     
     // Get input of data bit containing error
@@ -143,7 +146,7 @@ int main() {
         bitPositionWithError = convertBinaryToDecimal(syndromeWord, 4);
     }
     // Display the position number
-    printf("The error occurs in position %d of the table\n", bitPositionWithError);
+    printf("The error occurs in position %d of the table including data bits and check bits\n", bitPositionWithError);
     
     printf("\nEND OF PROGRAM.\n");
     exit(0);
